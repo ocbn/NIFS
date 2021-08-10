@@ -114,13 +114,13 @@ def model1():
                 x_train, x_test = term_doc_matrix[train_index], term_doc_matrix[test_index]
                 y_train, y_test = labels[train_index], labels[test_index]
                 evo = EvoFeatureSelection(n_runs=4, n_folds=2,
-                                          evaluator=LogisticRegression(solver='lbfgs', max_iter=300, random_state=rs),
+                                          evaluator=LogisticRegression(solver='lbfgs', max_iter=1000, random_state=rs),
                                           optimizer=o,
                                           random_seed=rs)
                 x_train_new = evo.fit_transform(x_train, y_train)
                 num_selected.append(x_train_new.shape[1])
                 x_test_new = evo.transform(x_test)
-                classifier = LogisticRegression(solver='lbfgs', max_iter=300, random_state=rs)
+                classifier = LogisticRegression(solver='lbfgs', max_iter=1000, random_state=rs)
                 classifier.fit(x_train_new, y_train)
                 predictions = classifier.predict(x_test_new)
                 acc = metrics.accuracy_score(y_true=y_test, y_pred=predictions)
@@ -223,7 +223,7 @@ def filter_based_execution_time():
         fe_time = time.time()
         f_time.insert(idx, fe_time - fs_time)
         cs_time = time.time()
-        classifier = LogisticRegression(solver='lbfgs', max_iter=300, random_state=rs)
+        classifier = LogisticRegression(solver='lbfgs', max_iter=1000, random_state=rs)
         classifier.fit(x_train_new, y_train)
         predictions = classifier.predict(x_test_new)
         ce_time = time.time()
@@ -268,7 +268,7 @@ def nature_inspired_execution_time():
                 x_train, x_test = tdm[train_index], tdm[test_index]
                 y_train, y_test = labels[train_index], labels[test_index]
                 evo_start = time.time()
-                evo = EvoFeatureSelection(n_runs=4, n_folds=2, evaluator=LogisticRegression(solver='lbfgs', max_iter=300, random_state=rs), optimizer=o, random_seed=rs)
+                evo = EvoFeatureSelection(n_runs=4, n_folds=2, evaluator=LogisticRegression(solver='lbfgs', max_iter=1000, random_state=rs), optimizer=o, random_seed=rs)
                                           # optimizer_settings={'NP': 100})
                 # nGEN (int): Maximum number of algorithm iterations/generations.
                 # nFES (int): Maximum number of function evaluations. Default 1000
@@ -280,7 +280,7 @@ def nature_inspired_execution_time():
                 num_selected.insert(f_idx, x_train_new.shape[1])
                 x_test_new = evo.transform(x_test)
                 cl_start = time.time()
-                classifier = LogisticRegression(solver='lbfgs', max_iter=300, random_state=rs)
+                classifier = LogisticRegression(solver='lbfgs', max_iter=1000, random_state=rs)
                 classifier.fit(x_train_new, y_train)
                 predictions = classifier.predict(x_test_new)
                 cl_end = time.time()
