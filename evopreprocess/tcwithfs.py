@@ -49,7 +49,7 @@ texts = data["text"]
 labels = data["label"]
 
 classifiers = [
-            ('LR', LogisticRegression(solver='lbfgs', max_iter=300, random_state=rs)),
+            ('LR', LogisticRegression(solver='lbfgs', max_iter=1000, random_state=rs)),
             ('SVM', SVC(kernel='linear', random_state=rs)),
             ('NB', GaussianNB()),
             ('MNB', MultinomialNB()),
