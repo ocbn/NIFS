@@ -400,8 +400,8 @@ def ex_on_r8_dataset_with_fs(x_tr, x_tst, y_train, y_test):
         idx = 0
         for k in range(10, x_train.shape[1], 10):
             acc_scores = {"SVM": []}
-            # selector = SelectKBest(chi2, k=k)  # random state algoritma dogası geregi yok
-            selector = SelectKBest(mi, k=k) # random state var. (Biz asagıdakini kullandık)
+            # selector = SelectKBest(chi2, k=k)  
+            selector = SelectKBest(mi, k=k) 
             x_train_new = selector.fit_transform(x_train, y_train)
             x_test_new = selector.transform(x_test)
             c = SVC(kernel='linear', random_state=rs)
@@ -437,8 +437,8 @@ def ex_on_n8_dataset_with_fs(x_tr, x_tst, y_train, y_test):
         idx = 0
         for k in range(10, x_train.shape[1], 10):
             acc_scores = {"LR": []}
-            selector = SelectKBest(chi2, k=k)  # random state algoritma dogası geregi yok
-            # selector = SelectKBest(mi, k=k) # random state var. (Biz asagıdakini kullandık)
+            selector = SelectKBest(chi2, k=k)  
+            # selector = SelectKBest(mi, k=k) 
             x_train_new = selector.fit_transform(x_train, y_train)
             x_test_new = selector.transform(x_test)
             c = LogisticRegression(solver='lbfgs', max_iter=1000, random_state=rs)
