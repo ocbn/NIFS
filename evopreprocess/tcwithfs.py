@@ -160,9 +160,9 @@ def model2():
             for train_index, test_index in StratifiedKFold(n_folds).split(term_doc_matrix, labels):
                 x_train, x_test = term_doc_matrix[train_index], term_doc_matrix[test_index]
                 y_train, y_test = labels[train_index], labels[test_index]
-                # selector = SelectKBest(chi2, k=k)  # random state algoritma dogası geregi yok
-                # selector = SelectKBest(mi, k=k) # random state var. (Biz asagıdakini kullandık)
-                selector = SelectKBest(mutual_info_classif, k=k)  # random state yok, her run icin farklı sonuc gelir
+                # selector = SelectKBest(chi2, k=k)  
+                # selector = SelectKBest(mi, k=k) 
+                selector = SelectKBest(mutual_info_classif, k=k)  
                 x_train_new = selector.fit_transform(x_train, y_train)
                 x_test_new = selector.transform(x_test)
                 for c_name, c in classifiers:
@@ -189,7 +189,6 @@ def model3():
         print("Vectorizer: {} | # of samples: {} | # of features: {}".
               format(v_name, str(tdm.shape[0]), str(tdm.shape[1])))
         print('-' * 100)
-        # cross_val_score ile aynı sonucu veriyor n_fold sonucunda!
         # f_score = cross_val_score(classifier, term_doc_matrix, labels, scoring='accuracy', cv=n_folds).mean() * 100
         # print("Average acc of " + name + " is: ", f_score)
         for name, classifier in classifiers:
